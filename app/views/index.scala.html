@@ -1,0 +1,76 @@
+@(projects: List[models.Project], departments: List[models.Department], user: models.users.User,env: play.api.Environment)
+
+@main("Projects",user) {
+
+<p class="lead">Project Summary</p>
+<br>
+<div class="row">
+  <div class="col-sm-2">
+    <h4>Departments</h4>
+    <div class="list-group">
+      <a href="@routes.HomeController.index(0)" class="list-group-item">All Departments</a>
+      @for(c <- departments) {
+        <a href="@routes.HomeController.index(c.getId)" class="list-group-item">@c.getName
+          <span class="badge">@c.getProjects.size()</span>
+        </a>
+    }
+    </div>
+  </div>
+  <div class="col-sm-10">
+    <table class="table table-bordered table-hover table-condensed">
+      @if(flash.containsKey("success")) {
+        <div class="alert alert-success">
+          @flash.get("success")
+        </div>
+      }
+      <thead>
+        <tr>
+          <th>Picture</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Project Involved In</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th colspan="2"></th>      
+        </tr>
+      </thead>
+
+      <tbody>
+        @for(p<-projects) {
+          <tr>
+              @if(env.resource("public/images/projectImages/thumbnails/" + p.getId + ".jpg").isDefined) {
+                <td><img src="/assets/images/projectImages/thumbnails/@(p.getId + ".jpg")"/></td>
+            } else {
+                <td><img src="/assets/images/projectImages/thumbnails/noImage.jpg"/></td>
+            }
+            <td class="numeric">@p.getId</td>
+            <td><a href="@routes.HomeController.projectDetails(p.getId)">
+                @p.getName</td>
+               </a>
+            <td>@p.getDepartment.getName</td>        
+            <td>@p.getDescription</td>
+            
+            <td>
+              <a href="@routes.HomeController.updateProject(p.getId)" class="button xs btn-danger">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </a>
+            </td>        <td>
+              <a href="@routes.HomeController.deleteProject(p.getId)" class="button xs btn-danger" onclick="return confirmDel();">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+            </td>
+          </tr>
+        }
+      </tbody>
+
+    </table>
+
+    <p>
+      <a href="@routes.HomeController.addProject()">
+        <button class="btn btn-primary">Add a project</button>
+      </a>
+    </p>
+  </div>
+</div>
+}

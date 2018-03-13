@@ -1,0 +1,21 @@
+@(employeeForm: Form[models.Employee],user: models.users.User)
+@import helper._
+
+@main("Add Employee",user) {
+    <p class="lead">Add a new employee</p>
+    @form(action=routes.HomeController.addEmployeeSubmit(), 'class-> "form-horizontal", 'role -> "form") {
+        @CSRF.formField
+
+        @inputText(employeeForm("name"), '_label -> "Name", 'class -> "form_control")
+        @inputText(employeeForm("email"), '_label -> "E-mail", 'class -> "form_control")
+
+        @inputText(employeeForm("id"), '_label -> "", 'hidden -> "hidden")
+
+        <div class="actions">
+            <input type="submit" value="Add Employee" class="btn btn-primary">
+            <a href="@routes.HomeController.index(0)">
+                <button type="button" class="btn btn-warning">Cancel</button>
+            </a>
+        </div>
+        }
+}

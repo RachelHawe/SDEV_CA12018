@@ -1,0 +1,51 @@
+@(employees: List[models.Employee], user: models.users.User)
+
+@main("Employees",user) {
+
+<p class="lead">Our Employees</p>
+
+@if(flash.containsKey("success")) {
+  <div class="alert alert-success">
+    @flash.get("success")
+  </div>
+}
+
+<table class="table table-bordered table-hover table-condensed">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="2"></th>      
+    </tr>
+  </thead>
+
+  <tbody>
+    @for(c<-employees) {
+      <tr>
+        <td class="numeric">@c.getId</td>
+        <td>@c.getName</td>
+        <td>@c.getEmail</td>
+        <td>
+          <a href="@routes.HomeController.updateEmployee(c.getId)" class="button-xs btn-danger">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+        </td>  
+        <td>
+          <a href="@routes.HomeController.deleteEmployee(c.getId)" class="button-xs btn-danger"  onclick="return confirmDel()">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
+      </tr>
+    }
+  </tbody>
+
+</table>
+<p>
+  <a href="@routes.HomeController.addEmployee()">
+    <button class="btn btn-primary">Add a Employee</button>
+  </a>
+</p>
+
+}

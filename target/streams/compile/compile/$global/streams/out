@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/home/wdd/Documents/Sdev/SDEVCAPlayFramework/lab2/app/views/employee.scala.html:28:16: value getName is not a member of models.Employee[0m
+[0m[[0m[31merror[0m] [0m[0m        <td>@c.getName</td>[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/wdd/Documents/Sdev/SDEVCAPlayFramework/lab2/app/views/employee.scala.html:29:16: value getEmail is not a member of models.Employee[0m
+[0m[[0m[31merror[0m] [0m[0m        <td>@c.getEmail</td>[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
